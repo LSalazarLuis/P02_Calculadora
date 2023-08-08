@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class Lamina_Botones extends JPanel{
 	
 	private JButton[] botones;
-	private final String[] rotulos = {"%","C","^","/","7","8","9","x","4","5","6","-","1","2","3","+","+/-","0",".","="};
+	private final String[] rotulos = {"√","C","^","/","7","8","9","x","4","5","6","-","1","2","3","+","+/-","0",".","="};
 	
 	public Lamina_Botones() {
 		

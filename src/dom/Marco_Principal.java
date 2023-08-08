@@ -22,6 +22,7 @@ public class Marco_Principal extends JFrame{
 		
 		add(Marco_Principal.pantalla, BorderLayout.NORTH);
 		
+		
 		// Botones de la calculadora:
 		
 		Lamina_Botones botones = new Lamina_Botones();
