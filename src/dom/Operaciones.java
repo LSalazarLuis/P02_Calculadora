@@ -1,5 +1,6 @@
 package dom;
 import java.awt.event.*;
+import java.text.*;
 
 public class Operaciones implements ActionListener{
 	
@@ -10,6 +11,7 @@ public class Operaciones implements ActionListener{
 	private double operando2;
 	private String operadorMatematico;
 	private boolean signo;
+	private NumberFormat formatoNumero;
 	
 	public Operaciones() {
 		
@@ -17,6 +19,7 @@ public class Operaciones implements ActionListener{
 		this.puntoDecimal = false;
 		this.operadorMatematico = "";
 		this.signo = true;
+		this.formatoNumero = NumberFormat.getInstance();
 		
 	}
 
@@ -27,24 +30,31 @@ public class Operaciones implements ActionListener{
 		
 		if(entrada.equalsIgnoreCase("%") || entrada.equalsIgnoreCase("/") || entrada.equalsIgnoreCase("^") ||
 		   entrada.equalsIgnoreCase("+") || entrada.equalsIgnoreCase("-") || entrada.equalsIgnoreCase("X")){
+			Number n = null;
+			try {
+				n = this.formatoNumero.parse(Marco_Principal.getTextoPantalla());
+				this.operando1 = n.doubleValue();
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
-			this.operando1 = Double.parseDouble(Marco_Principal.getTextoPantalla());
 			this.principio = true;
 			this.puntoDecimal = false;
 			this.operadorMatematico = entrada;
 
 		}
-		else if(entrada.equalsIgnoreCase(".")) {
+		else if(entrada.equalsIgnoreCase(",")) {
 			
 			if(!this.puntoDecimal && this.principio) {
 				
-				Marco_Principal.setTextoPantalla("0.");
+				Marco_Principal.setTextoPantalla("0,");
 				this.puntoDecimal = true; // la variable me limita a un solo punto decimal
 				this.principio = false;
 				
 			}
 			else {
-				Marco_Principal.setTextoPantalla(Marco_Principal.getTextoPantalla() + ".");
+				Marco_Principal.setTextoPantalla(Marco_Principal.getTextoPantalla() + ",");
 				this.puntoDecimal = true;
 				this.principio = false;
 			}
@@ -68,23 +78,41 @@ public class Operaciones implements ActionListener{
 		}
 		else if(entrada.equals("√")) {
 			
-			this.operando1 = Double.parseDouble(Marco_Principal.getTextoPantalla());
+			Number n = null;
+			try {
+				n = this.formatoNumero.parse(Marco_Principal.getTextoPantalla());
+				this.operando1 = n.doubleValue();
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			this.operadorMatematico = entrada;
 			this.obtenerResultado();
-			Marco_Principal.setTextoPantalla("" + (this.resultado >= 0 ? this.resultado : "Error: Entrada no válida"));
+			//Aqui evaluo si el metodo obtenerResultado() me devuelve un valor negativo, lo que quiere decir que se esta tratando de obtener la raiz de un numero negativo
+			Marco_Principal.setTextoPantalla("" + (this.resultado >= 0 ? this.formatoNumero.format(this.resultado) : "Error: Entrada no válida"));
 			this.operadorMatematico ="";
 			
 		}
 		
 		else if(entrada.equalsIgnoreCase("=")) {
 			
-			System.out.println("valor 1 = " +this.operando1);
-			this.operando2 = Double.parseDouble(Marco_Principal.getTextoPantalla());
-			System.out.println("valor 2 = " + this.operando2);
+			System.out.println("valor 1 = " +this.operando1 +"\n");
+			Number n = null;
+			
+			try {
+				n = this.formatoNumero.parse(Marco_Principal.getTextoPantalla());
+				this.operando2 = n.doubleValue();
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			System.out.println("valor 2 = " + this.operando2 +"\n");
 			this.obtenerResultado();
 			System.out.println("operacion matematica:" + this.operadorMatematico);
-			System.out.println("El resultado es:" + this.resultado);
-			Marco_Principal.setTextoPantalla("" + this.resultado);
+			System.out.println("El resultado es:" + this.formatoNumero.format(this.resultado) + "\n");
+			Marco_Principal.setTextoPantalla("" + this.formatoNumero.format(this.resultado));
 			this.resetear();
 
 			
