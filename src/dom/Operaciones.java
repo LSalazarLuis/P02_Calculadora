@@ -31,6 +31,8 @@ public class Operaciones implements ActionListener{
 		if(entrada.equalsIgnoreCase("%") || entrada.equalsIgnoreCase("/") || entrada.equalsIgnoreCase("^") ||
 		   entrada.equalsIgnoreCase("+") || entrada.equalsIgnoreCase("-") || entrada.equalsIgnoreCase("X")){
 			Number n = null;
+			// dentro del bloque try-catch, se usa la clase Number/NumberFormat, para dar formato a los números
+			// los miles se marcan con punto y los decimales con la coma.
 			try {
 				n = this.formatoNumero.parse(Marco_Principal.getTextoPantalla());
 				this.operando1 = n.doubleValue();
@@ -49,7 +51,7 @@ public class Operaciones implements ActionListener{
 			if(!this.puntoDecimal && this.principio) {
 				
 				Marco_Principal.setTextoPantalla("0,");
-				this.puntoDecimal = true; // la variable me limita a un solo punto decimal
+				this.puntoDecimal = true; // la variable se limita a un solo punto decimal
 				this.principio = false;
 				
 			}
@@ -89,7 +91,7 @@ public class Operaciones implements ActionListener{
 			
 			this.operadorMatematico = entrada;
 			this.obtenerResultado();
-			//Aqui evaluo si el metodo obtenerResultado() me devuelve un valor negativo, lo que quiere decir que se esta tratando de obtener la raiz de un numero negativo
+			//Aquí evaluó si el método obtenerResultado() me devuelve un valor negativo, lo que quiere decir que se está tratando de obtener la raíz de un numero negativo
 			Marco_Principal.setTextoPantalla("" + (this.resultado >= 0 ? this.formatoNumero.format(this.resultado) : "Error: Entrada no válida"));
 			this.operadorMatematico ="";
 			
@@ -111,7 +113,7 @@ public class Operaciones implements ActionListener{
 			System.out.println("valor 2 = " + this.operando2 +"\n");
 			this.obtenerResultado();
 			System.out.println("operacion matematica:" + this.operadorMatematico);
-			System.out.println("El resultado es:" + this.formatoNumero.format(this.resultado) + "\n");
+			System.out.println("El resultado es:" + this.resultado + "\n");
 			Marco_Principal.setTextoPantalla("" + this.formatoNumero.format(this.resultado));
 			this.resetear();
 
@@ -125,9 +127,9 @@ public class Operaciones implements ActionListener{
 			this.signo = true;
 
 		}
-		else {//ingresara en este bloque de codigo solo si se preciona un número.
+		else {//ingresara en este bloque de código solo si se presiona un número.
 			
-			//para borrar el contenido de la pantalla al principio
+			//para borrar el contenido de la pantalla al principio.
 			if(principio) {
 				
 				Marco_Principal.setTextoPantalla("");
@@ -135,14 +137,14 @@ public class Operaciones implements ActionListener{
 
 			}
 			
-			//Para mantener los datos de pantalla hasta que se precione la tecla de una operacion
+			//Para mantener los datos de pantalla hasta que se presione la tecla de una operación
 			Marco_Principal.setTextoPantalla(Marco_Principal.getTextoPantalla() + entrada);
 			
 		}
 		
 	}
 	
-	// Metodo para realizar las operaciones matematicas:
+	// Método para realizar las operaciones matemáticas:
 	private void obtenerResultado() {
 		
 		switch(this.operadorMatematico) {
@@ -179,7 +181,7 @@ public class Operaciones implements ActionListener{
 		
 	}
 	
-	//Metodo para resetear los valores
+	//Método para resetear los valores
 	private void resetear() {
 		
 		this.operando1 = this.operando2 = 0;

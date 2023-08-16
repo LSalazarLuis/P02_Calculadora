@@ -8,7 +8,7 @@ public class Marco_Principal extends JFrame{
 	
 	public Marco_Principal() {
 		
-		// Caracteristicas de la ventana:
+		// Características de la ventana:
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(350,500);
@@ -28,7 +28,7 @@ public class Marco_Principal extends JFrame{
 		Lamina_Botones botones = new Lamina_Botones();
 		add(botones, BorderLayout.CENTER);
 		
-		// Se agregan los siguientes JPanel, con su respectiva posicion BorderLayout, para generar un pequeño mmargen con la ventana
+		// Se agregan los siguientes JPanel, con su respectiva posición BorderLayout, para generar un pequeño margen con la ventana
 		add(new JPanel(),BorderLayout.WEST);
 		add(new JPanel(),BorderLayout.EAST);
 		add(new JPanel(),BorderLayout.SOUTH);
